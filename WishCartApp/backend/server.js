@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cors());
 
 //route prefix
-//app.use("", require("./routes/routes.js"));
+app.use("", require("./routes/wishItemRoutes"));
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

@@ -11,9 +11,9 @@ module.exports.getWishItems = async (req, res) => {
 };
 
 module.exports.createWishItem = async (req, res) => {
-  const { text } = req.body;
+  const { wishItemName , wishItemPrice, wishItemDescription ,wishItemURL,wishItemCategory,wishItemPriority,isPurchased } = req.body;
   wishItemModel
-    .create({ text })
+    .create({ wishItemName , wishItemPrice, wishItemDescription ,wishItemURL,wishItemCategory,wishItemPriority,isPurchased })
     .then((data) => {
       console.log("Wish Item added successfully", data);
       return res.status(200).json(data);
@@ -25,9 +25,9 @@ module.exports.createWishItem = async (req, res) => {
 };
 
 module.exports.updateWishItem = async (req, res) => {
-  const { _id, text } = req.body;
+  const { _id, wishItemName , wishItemPrice, wishItemDescription ,wishItemURL,wishItemCategory,wishItemPriority,isPurchased } = req.body;
   wishItemModel
-    .findByIdAndUpdate(_id, { text })
+    .findByIdAndUpdate(_id, { wishItemName , wishItemPrice, wishItemDescription ,wishItemURL,wishItemCategory,wishItemPriority,isPurchased })
     .then((data) => {
       console.log("Wish Item updated successfully:", data);
       res.status(200).json(data);

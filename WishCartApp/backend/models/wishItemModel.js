@@ -8,14 +8,12 @@ const wishItemSchema = new mongoose.Schema(
         wishItemCategory: { type: String, required: true },
         wishItemPriority: { type: String, required: true },
         isPurchased: { type: Boolean, required: true },
-
-        
-        
     },
-    {
-        timestamps: true,
-    }
-)
+      {
+        timestamps: true, 
+      },
+    );
+
 
 // Create a model named 'WishItem' using the defined schema
 const WishItem = mongoose.model('WishItem', wishItemSchema);

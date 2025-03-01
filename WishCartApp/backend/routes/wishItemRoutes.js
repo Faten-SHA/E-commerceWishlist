@@ -5,8 +5,8 @@ const router = express.Router();
 
     router.get("/wishItems", getWishItems);
     router.post("/wishItems/create", createWishItem);
-    router.put("/wishItems/update/:id", updateWishItem);
-    router.delete("/wishItems/delete/:id", deleteWishItem);
+    router.put("/wishItems/update", updateWishItem);
+    router.delete("/wishItems/delete", deleteWishItem);
 
 
 module.exports = router;

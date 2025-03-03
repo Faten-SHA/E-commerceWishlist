@@ -1,0 +1,41 @@
+/* WishCartAddForm.css */
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-top: auto;
+  }
+  
+  h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .wish-form {
+    width: 90%; /* Use a percentage for width */
+    max-width: 400px; /* Set a max width */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  /* Media Queries for Responsiveness */
+  @media (max-width: 768px) {
+    .wish-form {
+      width: 95%; /* Increase width on smaller screens */
+      padding: 15px; /* Adjust padding */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .wish-form {
+      width: 100%; /* Full width on very small screens */
+      padding: 10px; /* Further adjust padding */
+    }
+  }
+

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
+import WishItemsList from "./WishItemsList";
+import "./WishCartAddForm.css";
 
 function WishCartAddForm() {
   const [wishItemName, setWishItemName] = useState("");
@@ -12,6 +14,7 @@ function WishCartAddForm() {
   const [itemCategory, setItemCategory] = useState("");
   const [itemPriority, setItemPriority] = useState("");
   const [isPurchased, setIsPurchased] = useState(false);
+  
 
   console.log("wishItemName :", wishItemName);
 
@@ -30,20 +33,28 @@ function WishCartAddForm() {
     //console.log(newWishItem);
 
     try {
+        if (window.confirm("Are you sure you want to add this item?")) {
       const response = await axios.post(
         "http://localhost:5000/wishItems/create",
         newWishItem
       );
     //   console.log("response.data is :",response.data);
+
       alert(response.data.msg);
+      WishItemsList();
+    }
     } catch (error) {
       console.error("There was an error adding the item!", error);
       alert(error.response.data.error);
     }
   };
-  return (
+  return ( <>
     <div>
-      <Form onSubmit={addWishItemForm}>
+    <h2>Add a new item to your wish list</h2>
+    </div>
+    <div className="form-container">
+   
+      <Form onSubmit={addWishItemForm} className="wish-form">
         <Form.Group className="mb-3">
           <Form.Label>Item Name</Form.Label>
           <Form.Control
@@ -108,9 +119,9 @@ function WishCartAddForm() {
             onChange={(e) => setItemCategory(e.target.value)}
           >
             <option>Open this select menu</option>
-            <option value="Home&Living">Home & Living 🏡</option>
-            <option value="Tech&Gadgets">Tech & Gadgets 📱</option>
-            <option value="Fashion&Apparel">Fashion & Apparel 👗</option>
+            <option value="Home&Living">🏡 Home & Living </option>
+            <option value="Tech&Gadgets">📱 Tech & Gadgets </option>
+            <option value="Fashion&Apparel">👗 Fashion & Apparel </option>
           </Form.Select>
         </Form.Group>
 
@@ -130,7 +141,7 @@ function WishCartAddForm() {
 
         <Form.Group>
           {/* checkbox */}
-          <Form.Check type="checkbox" label="Is Purchased" />
+          <Form.Check type="checkbox" label="Is Purchased" value= {isPurchased} onChange={(e) => setIsPurchased(e.target.checked)} />
         </Form.Group>
 
         <Button variant="primary" type="submit">
@@ -138,6 +149,7 @@ function WishCartAddForm() {
         </Button>
       </Form>
     </div>
+    </>
   );
 }
 

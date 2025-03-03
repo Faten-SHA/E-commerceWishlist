@@ -1,0 +1,20 @@
+/* WishItemsList.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    padding: 20px; /* Add some padding */
+  }
+  
+  .card-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow cards to wrap to the next line */
+    justify-content: center; /* Center cards horizontally */
+    gap: 20px; /* Space between cards */
+  }
+  
+  .card {
+    width: 18rem; /* Fixed width for cards */
+    margin: 10px; /* Margin around each card */
+  }

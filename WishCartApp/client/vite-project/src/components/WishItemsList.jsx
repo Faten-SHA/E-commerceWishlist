@@ -3,10 +3,13 @@ import { useState , useEffect} from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
+import './WishItemsList.css';
+import EditForm from './EditForm';
 
 
 function WishItemsList() {
     let [items,setItems] = useState([]);
+    const [isEditing, setIsEditing] = useState(null);
 
     async function getWishItems() {
         try {
@@ -20,6 +23,7 @@ function WishItemsList() {
     } 
     useEffect(() => {
         getWishItems();
+        
     },[]);
 
 //Function To delete an item
@@ -40,35 +44,42 @@ async function deleteWishItem(id) {
     }
 }
 
+
+
   return (
     
-    <div>
+    <div className="container">
         <h1>Wish Items List</h1>
 
-       <div>
+       <div className="card-container">
         {items.map((item) => (
        <Card key={item._id} style={{ width: '18rem' }}>
       <Card.Img variant="top" src={item.wishItemImage} />
       <Card.Body>
         <Card.Title>{item.wishItemName}</Card.Title>
         <Card.Text>
-          {item.wishItemDescription}
+          Description: {item.wishItemDescription}
         </Card.Text>
         <Card.Text>
-          {item.wishItemPrice}
+          Price: {item.wishItemPrice}
         </Card.Text>
         <Card.Text>
-          {item.wishItemCategory}
+          Category: {item.wishItemCategory}
         </Card.Text>
-        <Button variant="primary">{item.wishItemURL}</Button>
+        <div>
+        <Button variant="primary" href={item.wishItemURL}>Go to Item's Website</Button>
+        </div>
+        <div>
         <Button variant="danger" onClick={()=>deleteWishItem(item._id)}>Delete</Button>
-        <Button variant="warning">Edit</Button>
+        <Button variant="warning" onClick={() => setIsEditing(item)}>Edit</Button>
+        </div>
       </Card.Body>
     </Card>
     ))}
        </div>
+       {isEditing && <EditForm item={isEditing} onSave={() => { setIsEditing(null); getWishItems(); } }/>}  // I don't understand this line
     </div>
   )
 }
 
-export default WishItemsList
+export default WishItemsList;

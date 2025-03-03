@@ -133,9 +133,9 @@ function WishCartAddForm() {
             onChange={(e) => setItemPriority(e.target.value)}
           >
             <option>Open this select menu</option>
-            <option value="Need It Now">Need It Now! 🚀</option>
-            <option value="Would Be Nice">Would Be Nice 🎯</option>
-            <option value="Maybe Someday">Maybe Someday 🤔</option>
+            <option value="NeedItNow">Need It Now! 🚀</option>
+            <option value="WouldBeNice">Would Be Nice 🎯</option>
+            <option value="MaybeSomeday">Maybe Someday 🤔</option>
           </Form.Select>
         </Form.Group>
 

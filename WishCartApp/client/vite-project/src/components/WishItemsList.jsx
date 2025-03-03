@@ -9,7 +9,8 @@ import EditForm from './EditForm';
 
 function WishItemsList() {
     let [items,setItems] = useState([]);
-    const [isEditing, setIsEditing] = useState(null);
+    const [isEditing, setIsEditing] = useState(false);
+    const [currentItem, setCurrentItem] = useState(null);
 
     async function getWishItems() {
         try {
@@ -25,6 +26,8 @@ function WishItemsList() {
         getWishItems();
         
     },[]);
+
+
 
 //Function To delete an item
 async function deleteWishItem(id) {
@@ -44,8 +47,20 @@ async function deleteWishItem(id) {
     }
 }
 
+//  Group items by priority
+const NeedItNow = items.filter(item => item.priority === 'NeedItNow');
+const WouldBeNice = items.filter(item => item.priority === 'WouldBeNice');
+const MaybeSomeday = items.filter(item => item.priority === 'MaybeSomeday');
 
+function CancelEditing() {
+  setIsEditing(false);
+}
 
+function startEditing(itemId){
+  console.log(itemId);
+  setIsEditing(true);
+  setCurrentItem(itemId);
+}
   return (
     
     <div className="container">
@@ -71,14 +86,19 @@ async function deleteWishItem(id) {
         </div>
         <div>
         <Button variant="danger" onClick={()=>deleteWishItem(item._id)}>Delete</Button>
-        <Button variant="warning" onClick={() => setIsEditing(item)}>Edit</Button>
+        <Button variant="warning" onClick={() => startEditing(item._id)}>Edit</Button>
         </div>
       </Card.Body>
+      {isEditing === true && item._id === currentItem? <EditForm CancelEditing ={CancelEditing} item={item} /> : null} 
     </Card>
+    
     ))}
+    
+    
        </div>
-       {isEditing && <EditForm item={isEditing} onSave={() => { setIsEditing(null); getWishItems(); } }/>}  // I don't understand this line
+       
     </div>
+    
   )
 }
 
